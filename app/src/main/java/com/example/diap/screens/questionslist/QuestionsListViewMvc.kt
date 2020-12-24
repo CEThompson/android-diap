@@ -1,22 +1,26 @@
 package com.example.diap.screens.questionslist
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.annotation.IdRes
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.diap.R
 import com.example.diap.questions.Question
-import java.util.ArrayList
+import com.example.diap.screens.common.viewsmvc.BaseViewMvc
+import java.util.*
 
 class QuestionsListViewMvc(
-        private val layoutInflater: LayoutInflater,
-        private val parent: ViewGroup?
+    layoutInflater: LayoutInflater,
+    parent: ViewGroup?
+) : BaseViewMvc<QuestionsListViewMvc.Listener>(
+    layoutInflater,
+    parent,
+    R.layout.layout_questions_list
 ) {
+
     interface Listener {
         fun onRefreshClicked()
         fun onQuestionClicked(clickedQuestion: Question)
@@ -25,12 +29,6 @@ class QuestionsListViewMvc(
     private val swipeRefresh: SwipeRefreshLayout
     private val recyclerView: RecyclerView
     private val questionsAdapter: QuestionsAdapter
-
-    private val listeners = HashSet<Listener>()
-
-    val rootView: View = layoutInflater.inflate(R.layout.layout_questions_list, parent, false)
-
-    private val context: Context get() = rootView.context
 
     init {
         // init pull-down-to-refresh
@@ -43,7 +41,7 @@ class QuestionsListViewMvc(
         // init recycler view
         recyclerView = findViewById(R.id.recycler)
         recyclerView.layoutManager = LinearLayoutManager(context)
-        questionsAdapter = QuestionsAdapter{ clickedQuestion ->
+        questionsAdapter = QuestionsAdapter { clickedQuestion ->
             for (listener in listeners) listener.onQuestionClicked(clickedQuestion)
         }
         recyclerView.adapter = questionsAdapter
@@ -52,14 +50,6 @@ class QuestionsListViewMvc(
 
     fun bindQuestions(questions: List<Question>) {
         questionsAdapter.bindData(questions)
-    }
-
-    fun registerListener(listener: Listener){
-        listeners.add(listener)
-    }
-
-    fun unregisterListener(listener: Listener){
-        listeners.remove(listener)
     }
 
     fun showProgressIndication() {
@@ -72,12 +62,8 @@ class QuestionsListViewMvc(
         }
     }
 
-    private fun <T : View?> findViewById(@IdRes id: Int): T {
-        return rootView.findViewById<T>(id)
-    }
-
     class QuestionsAdapter(
-            private val onQuestionClickListener: (Question) -> Unit
+        private val onQuestionClickListener: (Question) -> Unit
     ) : RecyclerView.Adapter<QuestionsAdapter.QuestionViewHolder>() {
 
         private var questionsList: List<Question> = ArrayList(0)
@@ -93,7 +79,7 @@ class QuestionsListViewMvc(
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuestionViewHolder {
             val itemView = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.layout_question_list_item, parent, false)
+                .inflate(R.layout.layout_question_list_item, parent, false)
             return QuestionViewHolder(itemView)
         }
 
