@@ -8,6 +8,7 @@ import com.example.diap.Constants
 import com.example.diap.networking.StackoverflowApi
 import com.example.diap.questions.FetchQuestionsUseCase
 import com.example.diap.questions.Question
+import com.example.diap.screens.common.dialogs.DialogsNavigator
 import com.example.diap.screens.common.dialogs.ServerErrorDialogFragment
 import com.example.diap.screens.questiondetails.QuestionDetailsActivity
 import kotlinx.coroutines.*
@@ -24,6 +25,8 @@ class QuestionsListActivity : AppCompatActivity(), QuestionsListViewMvc.Listener
 
     private lateinit var fetchQuestionsUseCase: FetchQuestionsUseCase
 
+    private lateinit var dialogsNavigator: DialogsNavigator
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -32,6 +35,8 @@ class QuestionsListActivity : AppCompatActivity(), QuestionsListViewMvc.Listener
         setContentView(viewMvc.rootView)
 
         fetchQuestionsUseCase = FetchQuestionsUseCase()
+
+        dialogsNavigator = DialogsNavigator(supportFragmentManager)
     }
 
     override fun onStart() {
@@ -77,8 +82,6 @@ class QuestionsListActivity : AppCompatActivity(), QuestionsListViewMvc.Listener
     }
 
     private fun onFetchFailed() {
-        supportFragmentManager.beginTransaction()
-            .add(ServerErrorDialogFragment.newInstance(), null)
-            .commitAllowingStateLoss()
+        dialogsNavigator.showServerErrorDialog()
     }
 }
