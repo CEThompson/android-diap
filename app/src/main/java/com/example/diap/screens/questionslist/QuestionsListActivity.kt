@@ -8,6 +8,7 @@ import com.example.diap.Constants
 import com.example.diap.networking.StackoverflowApi
 import com.example.diap.questions.FetchQuestionsUseCase
 import com.example.diap.questions.Question
+import com.example.diap.screens.common.ScreensNavigator
 import com.example.diap.screens.common.dialogs.DialogsNavigator
 import com.example.diap.screens.common.dialogs.ServerErrorDialogFragment
 import com.example.diap.screens.questiondetails.QuestionDetailsActivity
@@ -27,6 +28,8 @@ class QuestionsListActivity : AppCompatActivity(), QuestionsListViewMvc.Listener
 
     private lateinit var dialogsNavigator: DialogsNavigator
 
+    private lateinit var screensNavigator: ScreensNavigator
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -37,6 +40,8 @@ class QuestionsListActivity : AppCompatActivity(), QuestionsListViewMvc.Listener
         fetchQuestionsUseCase = FetchQuestionsUseCase()
 
         dialogsNavigator = DialogsNavigator(supportFragmentManager)
+
+        screensNavigator = ScreensNavigator(this)
     }
 
     override fun onStart() {
@@ -59,7 +64,7 @@ class QuestionsListActivity : AppCompatActivity(), QuestionsListViewMvc.Listener
     }
 
     override fun onQuestionClicked(clickedQuestion: Question) {
-        QuestionDetailsActivity.start(this, clickedQuestion.id)
+        screensNavigator.toQuestionDetails(clickedQuestion.id)
     }
 
     private fun fetchQuestions() {

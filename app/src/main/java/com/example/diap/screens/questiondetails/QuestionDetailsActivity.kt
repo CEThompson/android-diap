@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import com.example.diap.questions.FetchQuestionDetailsUseCase
+import com.example.diap.screens.common.ScreensNavigator
 import com.example.diap.screens.common.dialogs.DialogsNavigator
 import com.example.diap.screens.common.dialogs.ServerErrorDialogFragment
 import kotlinx.coroutines.*
@@ -22,6 +23,8 @@ class QuestionDetailsActivity : AppCompatActivity(), QuestionDetailsViewMvc.List
 
     private lateinit var dialogsNavigator: DialogsNavigator
 
+    private lateinit var screensNavigator: ScreensNavigator
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewMvc = QuestionDetailsViewMvc(LayoutInflater.from(this), null)
@@ -30,6 +33,7 @@ class QuestionDetailsActivity : AppCompatActivity(), QuestionDetailsViewMvc.List
         questionId = intent.extras!!.getString(EXTRA_QUESTION_ID)!!
         fetchQuestionDetailsUseCase = FetchQuestionDetailsUseCase()
         dialogsNavigator = DialogsNavigator(supportFragmentManager)
+        screensNavigator = ScreensNavigator(this)
     }
 
     override fun onStart() {
@@ -69,7 +73,7 @@ class QuestionDetailsActivity : AppCompatActivity(), QuestionDetailsViewMvc.List
     }
 
     override fun onBackClicked() {
-        onBackPressed()
+        screensNavigator.navigateBack()
     }
 
     companion object {
