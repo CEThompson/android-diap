@@ -1,23 +1,15 @@
 package com.example.diap.screens.questionslist
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
-import androidx.appcompat.app.AppCompatActivity
-import com.example.diap.Constants
-import com.example.diap.MyApplication
-import com.example.diap.networking.StackoverflowApi
 import com.example.diap.questions.FetchQuestionsUseCase
 import com.example.diap.questions.Question
 import com.example.diap.screens.common.ScreensNavigator
+import com.example.diap.screens.common.activities.BaseActivity
 import com.example.diap.screens.common.dialogs.DialogsNavigator
-import com.example.diap.screens.common.dialogs.ServerErrorDialogFragment
-import com.example.diap.screens.questiondetails.QuestionDetailsActivity
 import kotlinx.coroutines.*
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
-class QuestionsListActivity : AppCompatActivity(), QuestionsListViewMvc.Listener {
+class QuestionsListActivity : BaseActivity(), QuestionsListViewMvc.Listener {
 
     private val coroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
 
@@ -38,7 +30,7 @@ class QuestionsListActivity : AppCompatActivity(), QuestionsListViewMvc.Listener
 
         setContentView(viewMvc.rootView)
 
-        fetchQuestionsUseCase = (application as MyApplication).fetchQuestionsUseCase
+        fetchQuestionsUseCase = compositionRoot.fetchQuestionsUseCase
 
         dialogsNavigator = DialogsNavigator(supportFragmentManager)
 
