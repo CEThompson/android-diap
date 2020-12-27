@@ -5,6 +5,7 @@ import com.example.diap.Constants
 import com.example.diap.networking.StackoverflowApi
 import com.example.diap.questions.FetchQuestionDetailsUseCase
 import com.example.diap.questions.FetchQuestionsUseCase
+import com.example.diap.screens.common.ScreensNavigator
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -19,11 +20,8 @@ class AppCompositionRoot {
             .build()
     }
 
-    private val stackoverflowApi: StackoverflowApi by lazy { retrofit.create(StackoverflowApi::class.java) }
+    val stackoverflowApi: StackoverflowApi by lazy { retrofit.create(StackoverflowApi::class.java) }
 
-    val fetchQuestionsUseCase get() = FetchQuestionsUseCase(stackoverflowApi)
-
-    val fetchQuestionDetailsUseCase get() = FetchQuestionDetailsUseCase(stackoverflowApi)
 }
 
 // NOTE: Below is a retrofit instantiation that is not thread safe,
