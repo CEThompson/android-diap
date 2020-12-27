@@ -2,6 +2,8 @@ package com.example.diap
 
 import android.app.Application
 import com.example.diap.networking.StackoverflowApi
+import com.example.diap.questions.FetchQuestionDetailsUseCase
+import com.example.diap.questions.FetchQuestionsUseCase
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -12,7 +14,11 @@ class MyApplication: Application() {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-    val stackoverflowApi: StackoverflowApi = retrofit.create(StackoverflowApi::class.java)
+    private val stackoverflowApi: StackoverflowApi = retrofit.create(StackoverflowApi::class.java)
+
+    val fetchQuestionsUseCase get() = FetchQuestionsUseCase(stackoverflowApi)
+
+    val fetchQuestionDetailsUseCase get() = FetchQuestionDetailsUseCase(stackoverflowApi)
 
     override fun onCreate() {
         super.onCreate()
