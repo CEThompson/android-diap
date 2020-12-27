@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import com.example.diap.Constants
+import com.example.diap.MyApplication
 import com.example.diap.networking.StackoverflowApi
 import com.example.diap.questions.FetchQuestionsUseCase
 import com.example.diap.questions.Question
@@ -37,7 +38,7 @@ class QuestionsListActivity : AppCompatActivity(), QuestionsListViewMvc.Listener
 
         setContentView(viewMvc.rootView)
 
-        fetchQuestionsUseCase = FetchQuestionsUseCase()
+        fetchQuestionsUseCase = FetchQuestionsUseCase( (application as MyApplication).retrofit )
 
         dialogsNavigator = DialogsNavigator(supportFragmentManager)
 

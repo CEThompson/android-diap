@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
+import com.example.diap.MyApplication
 import com.example.diap.questions.FetchQuestionDetailsUseCase
 import com.example.diap.screens.common.ScreensNavigator
 import com.example.diap.screens.common.dialogs.DialogsNavigator
@@ -31,7 +32,7 @@ class QuestionDetailsActivity : AppCompatActivity(), QuestionDetailsViewMvc.List
         setContentView(viewMvc.rootView)
         // retrieve question ID passed from outside
         questionId = intent.extras!!.getString(EXTRA_QUESTION_ID)!!
-        fetchQuestionDetailsUseCase = FetchQuestionDetailsUseCase()
+        fetchQuestionDetailsUseCase = FetchQuestionDetailsUseCase((application as MyApplication).retrofit)
         dialogsNavigator = DialogsNavigator(supportFragmentManager)
         screensNavigator = ScreensNavigator(this)
     }
