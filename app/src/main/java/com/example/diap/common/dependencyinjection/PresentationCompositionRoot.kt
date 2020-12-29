@@ -1,4 +1,4 @@
-package com.example.diap.common.composition
+package com.example.diap.common.dependencyinjection
 
 import com.example.diap.networking.StackoverflowApi
 import com.example.diap.questions.FetchQuestionDetailsUseCase

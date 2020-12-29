@@ -1,7 +1,7 @@
 package com.example.diap
 
 import android.app.Application
-import com.example.diap.common.composition.AppCompositionRoot
+import com.example.diap.common.dependencyinjection.AppCompositionRoot
 
 class MyApplication : Application() {
 

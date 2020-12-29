@@ -7,26 +7,26 @@ import com.example.diap.questions.Question
 import com.example.diap.screens.common.ScreensNavigator
 import com.example.diap.screens.common.activities.BaseActivity
 import com.example.diap.screens.common.dialogs.DialogsNavigator
+import com.example.diap.screens.common.viewsmvc.ViewMvcFactory
 import kotlinx.coroutines.*
 
 class QuestionsListActivity : BaseActivity(), QuestionsListViewMvc.Listener {
 
     private val coroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
 
-    private lateinit var fetchQuestionsUseCase: FetchQuestionsUseCase
-    private lateinit var dialogsNavigator: DialogsNavigator
-    private lateinit var screensNavigator: ScreensNavigator
+    lateinit var fetchQuestionsUseCase: FetchQuestionsUseCase
+    lateinit var dialogsNavigator: DialogsNavigator
+    lateinit var screensNavigator: ScreensNavigator
+    lateinit var viewMvcFactory: ViewMvcFactory
 
     private lateinit var viewMvc: QuestionsListViewMvc
     private var isDataLoaded = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        injector.inject(this)
         super.onCreate(savedInstanceState)
-        viewMvc = compositionRoot.viewMvcFactory.newQuestionsListViewMvc(null)
+        viewMvc = viewMvcFactory.newQuestionsListViewMvc(null)
         setContentView(viewMvc.rootView)
-        fetchQuestionsUseCase = compositionRoot.fetchQuestionsUseCase
-        dialogsNavigator = compositionRoot.dialogsNavigator
-        screensNavigator = compositionRoot.screensNavigator
     }
 
     override fun onStart() {

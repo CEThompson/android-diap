@@ -10,6 +10,7 @@ import com.example.diap.screens.common.ScreensNavigator
 import com.example.diap.screens.common.activities.BaseActivity
 import com.example.diap.screens.common.dialogs.DialogsNavigator
 import com.example.diap.screens.common.fragments.BaseFragment
+import com.example.diap.screens.common.viewsmvc.ViewMvcFactory
 import kotlinx.coroutines.*
 
 class QuestionsListFragment : BaseFragment(), QuestionsListViewMvc.Listener {
@@ -20,21 +21,14 @@ class QuestionsListFragment : BaseFragment(), QuestionsListViewMvc.Listener {
 
     private lateinit var viewMvc: QuestionsListViewMvc
 
-    private lateinit var fetchQuestionsUseCase: FetchQuestionsUseCase
-
-    private lateinit var dialogsNavigator: DialogsNavigator
-
-    private lateinit var screensNavigator: ScreensNavigator
+    lateinit var fetchQuestionsUseCase: FetchQuestionsUseCase
+    lateinit var dialogsNavigator: DialogsNavigator
+    lateinit var screensNavigator: ScreensNavigator
+    lateinit var viewMvcFactory: ViewMvcFactory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        fetchQuestionsUseCase = compositionRoot.fetchQuestionsUseCase
-
-        dialogsNavigator = compositionRoot.dialogsNavigator
-        //dialogsNavigator = DialogsNavigator(supportFragmentManager)
-
-        screensNavigator = compositionRoot.screensNavigator
+        injector.inject(this)
     }
 
     override fun onCreateView(
@@ -42,7 +36,7 @@ class QuestionsListFragment : BaseFragment(), QuestionsListViewMvc.Listener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewMvc = compositionRoot.viewMvcFactory.newQuestionsListViewMvc(container)
+        viewMvc = viewMvcFactory.newQuestionsListViewMvc(container)
         //viewMvc = QuestionsListViewMvc(LayoutInflater.from(requireContext()), container)
         return viewMvc.rootView
     }

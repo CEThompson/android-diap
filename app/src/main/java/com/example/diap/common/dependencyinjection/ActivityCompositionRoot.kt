@@ -1,4 +1,4 @@
-package com.example.diap.common.composition
+package com.example.diap.common.dependencyinjection
 
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity

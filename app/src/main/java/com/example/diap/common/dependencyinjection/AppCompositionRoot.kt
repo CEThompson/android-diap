@@ -1,4 +1,4 @@
-package com.example.diap.common.composition
+package com.example.diap.common.dependencyinjection
 
 import android.app.Application
 import androidx.annotation.UiThread
