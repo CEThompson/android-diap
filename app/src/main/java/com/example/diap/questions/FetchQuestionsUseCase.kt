@@ -1,21 +1,17 @@
 package com.example.diap.questions
 
-import android.util.Log
-import com.example.diap.Constants
 import com.example.diap.networking.StackoverflowApi
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 class FetchQuestionsUseCase(
     private val stackoverflowApi: StackoverflowApi
 ) {
 
     sealed class Result {
-        class Success(val questions: List<Question>): Result()
-        object Failure: Result()
+        data class Success(val questions: List<Question>) : Result()
+        object Failure : Result()
     }
 
 

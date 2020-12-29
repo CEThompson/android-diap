@@ -1,22 +1,19 @@
 package com.example.diap.questions
 
-import com.example.diap.Constants
 import com.example.diap.networking.StackoverflowApi
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 class FetchQuestionDetailsUseCase(private val stackoverflowApi: StackoverflowApi) {
 
     sealed class Result {
-        class Success(val question: QuestionWithBody) : Result()
-        object Failure: Result()
+        data class Success(val question: QuestionWithBody) : Result()
+        object Failure : Result()
     }
 
     suspend fun fetchQuestion(questionId: String): Result {
-        return withContext(Dispatchers.IO){
+        return withContext(Dispatchers.IO) {
             try {
                 val response = stackoverflowApi.questionDetails(questionId)
                 if (response.isSuccessful && response.body() != null) {
