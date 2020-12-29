@@ -1,17 +1,15 @@
 package com.example.diap.common.composition
 
+import android.app.Application
 import androidx.annotation.UiThread
 import com.example.diap.Constants
 import com.example.diap.networking.StackoverflowApi
-import com.example.diap.questions.FetchQuestionDetailsUseCase
-import com.example.diap.questions.FetchQuestionsUseCase
-import com.example.diap.screens.common.ScreensNavigator
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 // This class composes services and resides at the root of the dependency tree
 @UiThread
-class AppCompositionRoot {
+class AppCompositionRoot(val application: Application) {
 
     private val retrofit: Retrofit by lazy {
         Retrofit.Builder()

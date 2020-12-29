@@ -10,6 +10,10 @@ class ActivityCompositionRoot(
     private val appCompositionRoot: AppCompositionRoot
 ) {
 
+    // For use of different contexts
+    // Since Android contexts violates Liskov substitution principle
+    val application get() = appCompositionRoot.application
+
     val layoutInflater: LayoutInflater get() = LayoutInflater.from(activity)
 
     val screensNavigator: ScreensNavigator by lazy {
