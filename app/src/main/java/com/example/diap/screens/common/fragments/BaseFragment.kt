@@ -13,7 +13,7 @@ open class BaseFragment : Fragment() {
             .presentationModule(
                 PresentationModule(
                     (requireActivity() as BaseActivity)
-                        .activityCompositionRoot
+                        .activityComponent
                 )
             )
             .build()

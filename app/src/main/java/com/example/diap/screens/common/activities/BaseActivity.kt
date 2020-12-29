@@ -6,13 +6,18 @@ import com.example.diap.common.dependencyinjection.*
 
 open class BaseActivity : AppCompatActivity() {
 
-    private val appCompositionRoot: AppCompositionRoot get() = (application as MyApplication).appCompositionRoot
+    private val appComponent get() = (application as MyApplication).appComponent
 
-    val activityCompositionRoot by lazy { ActivityCompositionRoot(this, appCompositionRoot) }
+    val activityComponent by lazy {
+        DaggerActivityComponent.builder()
+            .activityModule(
+                ActivityModule(this, appComponent)
+            ).build()
+    }
 
     private val presentationComponent by lazy {
         DaggerPresentationComponent.builder()
-            .presentationModule(PresentationModule(activityCompositionRoot))
+            .presentationModule(PresentationModule(activityComponent))
             .build()
     }
 

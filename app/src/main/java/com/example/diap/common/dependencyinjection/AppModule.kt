@@ -1,24 +1,29 @@
 package com.example.diap.common.dependencyinjection
 
 import android.app.Application
-import androidx.annotation.UiThread
 import com.example.diap.Constants
 import com.example.diap.networking.StackoverflowApi
+import dagger.Module
+import dagger.Provides
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 // This class composes services and resides at the root of the dependency tree
-@UiThread
-class AppCompositionRoot(val application: Application) {
+@Module
+class AppModule(val application: Application) {
 
-    private val retrofit: Retrofit by lazy {
+    @Provides
+    fun application() = application
+
+    @Provides
+    fun retrofit(): Retrofit =
         Retrofit.Builder()
             .baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-    }
 
-    val stackoverflowApi: StackoverflowApi by lazy { retrofit.create(StackoverflowApi::class.java) }
+    @Provides
+    fun stackoverflowApi(): StackoverflowApi = retrofit().create(StackoverflowApi::class.java)
 
 }
 

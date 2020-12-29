@@ -11,33 +11,35 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class PresentationModule(private val activityCompositionRoot: ActivityCompositionRoot) {
+class PresentationModule(private val activityComponent: ActivityComponent) {
 
     @Provides
-    fun layoutInflater() = activityCompositionRoot.layoutInflater
+    fun layoutInflater() = activityComponent.layoutInflater()
 
     @Provides
-    fun fragmentManager() = activityCompositionRoot.fragmentManager
+    fun fragmentManager() = activityComponent.fragmentManager()
 
     @Provides
-    fun stackoverflowApi() = activityCompositionRoot.stackoverflowApi
+    fun stackoverflowApi() = activityComponent.stackoverflowApi()
 
     @Provides
-    fun activity() = activityCompositionRoot.activity
+    fun activity() = activityComponent.activity()
 
     @Provides
     fun viewMvcFactory(layoutInflater: LayoutInflater) = ViewMvcFactory(layoutInflater)
 
     @Provides
-    fun screensNavigator() = activityCompositionRoot.screensNavigator
+    fun screensNavigator() = activityComponent.screensNavigator()
 
     @Provides
     fun dialogsNavigator(fragmentManager: FragmentManager) = DialogsNavigator(fragmentManager)
 
     @Provides
-    fun fetchQuestionsUseCase(stackoverflowApi: StackoverflowApi) = FetchQuestionsUseCase(stackoverflowApi)
+    fun fetchQuestionsUseCase(stackoverflowApi: StackoverflowApi) =
+        FetchQuestionsUseCase(stackoverflowApi)
 
     @Provides
-    fun fetchQuestionDetailsUseCase(stackoverflowApi: StackoverflowApi) = FetchQuestionDetailsUseCase(stackoverflowApi)
+    fun fetchQuestionDetailsUseCase(stackoverflowApi: StackoverflowApi) =
+        FetchQuestionDetailsUseCase(stackoverflowApi)
 
 }
