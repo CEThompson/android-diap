@@ -6,7 +6,7 @@ import com.example.diap.networking.StackoverflowApi
 import com.example.diap.screens.common.ScreensNavigator
 
 class ActivityCompositionRoot(
-    private val activity: AppCompatActivity,
+    val activity: AppCompatActivity,
     private val appCompositionRoot: AppCompositionRoot
 ) {
 

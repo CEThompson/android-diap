@@ -2,6 +2,7 @@ package com.example.diap.screens.questionslist
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import com.example.diap.common.dependencyinjection.Service
 import com.example.diap.questions.FetchQuestionsUseCase
 import com.example.diap.questions.Question
 import com.example.diap.screens.common.ScreensNavigator
@@ -14,10 +15,10 @@ class QuestionsListActivity : BaseActivity(), QuestionsListViewMvc.Listener {
 
     private val coroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
 
-    lateinit var fetchQuestionsUseCase: FetchQuestionsUseCase
-    lateinit var dialogsNavigator: DialogsNavigator
-    lateinit var screensNavigator: ScreensNavigator
-    lateinit var viewMvcFactory: ViewMvcFactory
+    @field:Service private lateinit var fetchQuestionsUseCase: FetchQuestionsUseCase
+    @field:Service private lateinit var dialogsNavigator: DialogsNavigator
+    @field:Service private lateinit var screensNavigator: ScreensNavigator
+    @field:Service private lateinit var viewMvcFactory: ViewMvcFactory
 
     private lateinit var viewMvc: QuestionsListViewMvc
     private var isDataLoaded = false

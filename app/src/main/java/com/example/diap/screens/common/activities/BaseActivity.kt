@@ -2,10 +2,7 @@ package com.example.diap.screens.common.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import com.example.diap.MyApplication
-import com.example.diap.common.dependencyinjection.ActivityCompositionRoot
-import com.example.diap.common.dependencyinjection.AppCompositionRoot
-import com.example.diap.common.dependencyinjection.Injector
-import com.example.diap.common.dependencyinjection.PresentationCompositionRoot
+import com.example.diap.common.dependencyinjection.*
 
 open class BaseActivity : AppCompatActivity() {
 
@@ -13,8 +10,12 @@ open class BaseActivity : AppCompatActivity() {
 
     val activityCompositionRoot by lazy { ActivityCompositionRoot(this, appCompositionRoot) }
 
-    private val compositionRoot by lazy { PresentationCompositionRoot(activityCompositionRoot) }
+    private val presentationComponent by lazy {
+        DaggerPresentationComponent.builder()
+            .presentationModule(PresentationModule(activityCompositionRoot))
+            .build()
+    }
 
-    protected val injector get() = Injector(compositionRoot)
+    protected val injector get() = Injector(presentationComponent)
 
 }
