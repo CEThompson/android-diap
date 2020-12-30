@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.diap.MyApplication
 import com.example.diap.common.dependencyinjection.activity.ActivityModule
 import com.example.diap.common.dependencyinjection.activity.DaggerActivityComponent
-import com.example.diap.common.dependencyinjection.presentation.DaggerPresentationComponent
 import com.example.diap.common.dependencyinjection.presentation.PresentationModule
 
 open class BaseActivity : AppCompatActivity() {
@@ -20,10 +19,7 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     private val presentationComponent by lazy {
-        DaggerPresentationComponent.builder()
-            .activityComponent(activityComponent)
-            .presentationModule(PresentationModule())
-            .build()
+        activityComponent.newPresentationComponent(PresentationModule())
     }
 
     protected val injector get() = presentationComponent

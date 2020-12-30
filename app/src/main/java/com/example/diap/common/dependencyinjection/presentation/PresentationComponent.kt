@@ -5,9 +5,10 @@ import com.example.diap.screens.questiondetails.QuestionDetailsActivity
 import com.example.diap.screens.questionslist.QuestionsListActivity
 import com.example.diap.screens.questionslist.QuestionsListFragment
 import dagger.Component
+import dagger.Subcomponent
 
 @PresentationScope
-@Component(dependencies = [ActivityComponent::class], modules = [PresentationModule::class])
+@Subcomponent(modules = [PresentationModule::class])
 interface PresentationComponent {
     fun inject(fragment: QuestionsListFragment)
     fun inject(activity: QuestionsListActivity)
