@@ -6,6 +6,7 @@ import com.example.diap.screens.questionslist.QuestionsListActivity
 import com.example.diap.screens.questionslist.QuestionsListFragment
 import dagger.Component
 
+@PresentationScope
 @Component(dependencies = [ActivityComponent::class], modules = [PresentationModule::class])
 interface PresentationComponent {
     fun inject(fragment: QuestionsListFragment)
