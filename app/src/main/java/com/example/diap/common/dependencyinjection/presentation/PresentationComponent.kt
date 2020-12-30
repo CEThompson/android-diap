@@ -1,14 +1,12 @@
 package com.example.diap.common.dependencyinjection.presentation
 
-import com.example.diap.common.dependencyinjection.activity.ActivityComponent
 import com.example.diap.screens.questiondetails.QuestionDetailsActivity
 import com.example.diap.screens.questionslist.QuestionsListActivity
 import com.example.diap.screens.questionslist.QuestionsListFragment
-import dagger.Component
 import dagger.Subcomponent
 
 @PresentationScope
-@Subcomponent(modules = [PresentationModule::class])
+@Subcomponent(modules = [PresentationModule::class, UseCaseModule::class])
 interface PresentationComponent {
     fun inject(fragment: QuestionsListFragment)
     fun inject(activity: QuestionsListActivity)
