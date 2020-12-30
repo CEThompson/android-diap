@@ -1,12 +1,11 @@
 package com.example.diap.common.dependencyinjection.app
 
-import android.app.Application
-import com.example.diap.networking.StackoverflowApi
+import com.example.diap.common.dependencyinjection.activity.ActivityComponent
+import com.example.diap.common.dependencyinjection.activity.ActivityModule
 import dagger.Component
 
 @AppScope
 @Component(modules = [AppModule::class])
 interface AppComponent {
-    fun application(): Application
-    fun stackoverflowApi(): StackoverflowApi
+    fun newActivityComponent(activityModule: ActivityModule): ActivityComponent
 }
