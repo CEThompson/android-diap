@@ -1,8 +1,8 @@
 package com.example.diap
 
 import android.app.Application
-import com.example.diap.common.dependencyinjection.AppModule
-import com.example.diap.common.dependencyinjection.DaggerAppComponent
+import com.example.diap.common.dependencyinjection.app.AppModule
+import com.example.diap.common.dependencyinjection.app.DaggerAppComponent
 
 class MyApplication : Application() {
 

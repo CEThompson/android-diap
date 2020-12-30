@@ -1,4 +1,4 @@
-package com.example.diap.common.dependencyinjection
+package com.example.diap.common.dependencyinjection.activity
 
 import android.app.Application
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import com.example.diap.networking.StackoverflowApi
 import com.example.diap.screens.common.ScreensNavigator
 import dagger.Component
 
+@ActivityScope
 @Component(modules = [ActivityModule::class])
 interface ActivityComponent {
     fun activity(): AppCompatActivity

@@ -2,6 +2,7 @@ package com.example.diap.common.dependencyinjection
 
 import android.view.LayoutInflater
 import androidx.fragment.app.FragmentManager
+import com.example.diap.common.dependencyinjection.activity.ActivityComponent
 import com.example.diap.networking.StackoverflowApi
 import com.example.diap.questions.FetchQuestionDetailsUseCase
 import com.example.diap.questions.FetchQuestionsUseCase

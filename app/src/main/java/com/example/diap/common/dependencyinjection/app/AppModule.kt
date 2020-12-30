@@ -1,4 +1,4 @@
-package com.example.diap.common.dependencyinjection
+package com.example.diap.common.dependencyinjection.app
 
 import android.app.Application
 import com.example.diap.Constants
@@ -7,23 +7,27 @@ import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Singleton
 
 // This class composes services and resides at the root of the dependency tree
 @Module
 class AppModule(val application: Application) {
 
     @Provides
-    fun application() = application
-
-    @Provides
-    fun retrofit(): Retrofit =
-        Retrofit.Builder()
+    @AppScope
+    fun retrofit(): Retrofit {
+        return Retrofit.Builder()
             .baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
+    }
 
     @Provides
-    fun stackoverflowApi(): StackoverflowApi = retrofit().create(StackoverflowApi::class.java)
+    fun application() = application
+
+    @Provides
+    @AppScope
+    fun stackoverflowApi(retrofit: Retrofit): StackoverflowApi = retrofit.create(StackoverflowApi::class.java)
 
 }
 

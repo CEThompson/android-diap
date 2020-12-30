@@ -1,5 +1,6 @@
-package com.example.diap.common.dependencyinjection
+package com.example.diap.common.dependencyinjection.presentation
 
+import com.example.diap.common.dependencyinjection.PresentationModule
 import com.example.diap.questions.FetchQuestionDetailsUseCase
 import com.example.diap.questions.FetchQuestionsUseCase
 import com.example.diap.screens.common.ScreensNavigator
