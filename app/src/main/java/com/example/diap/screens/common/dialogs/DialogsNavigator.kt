@@ -1,10 +1,11 @@
 package com.example.diap.screens.common.dialogs
 
 import androidx.fragment.app.FragmentManager
+import javax.inject.Inject
 
-class DialogsNavigator(private val fragmentManager: FragmentManager) {
+class DialogsNavigator @Inject constructor(private val fragmentManager: FragmentManager) {
 
-    fun showServerErrorDialog(){
+    fun showServerErrorDialog() {
         fragmentManager.beginTransaction()
             .add(ServerErrorDialogFragment.newInstance(), null)
             .commitAllowingStateLoss()

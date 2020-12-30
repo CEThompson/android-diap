@@ -11,9 +11,9 @@ class ActivityModule(
     val activity: AppCompatActivity
 ) {
 
-    @Provides
+    /*@Provides
     @ActivityScope
-    fun screensNavigator(): ScreensNavigator = ScreensNavigator(activity)
+    fun screensNavigator(): ScreensNavigator = ScreensNavigator(activity)*/
 
     @Provides
     fun activity() = activity

@@ -4,8 +4,9 @@ import com.example.diap.networking.StackoverflowApi
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class FetchQuestionsUseCase(
+class FetchQuestionsUseCase @Inject constructor(
     private val stackoverflowApi: StackoverflowApi
 ) {
 
