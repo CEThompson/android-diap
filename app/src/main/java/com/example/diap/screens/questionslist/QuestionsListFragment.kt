@@ -4,15 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.diap.common.dependencyinjection.Service
 import com.example.diap.questions.FetchQuestionsUseCase
 import com.example.diap.questions.Question
 import com.example.diap.screens.common.ScreensNavigator
-import com.example.diap.screens.common.activities.BaseActivity
 import com.example.diap.screens.common.dialogs.DialogsNavigator
 import com.example.diap.screens.common.fragments.BaseFragment
 import com.example.diap.screens.common.viewsmvc.ViewMvcFactory
 import kotlinx.coroutines.*
+import javax.inject.Inject
 
 class QuestionsListFragment : BaseFragment(), QuestionsListViewMvc.Listener {
 
@@ -22,10 +21,14 @@ class QuestionsListFragment : BaseFragment(), QuestionsListViewMvc.Listener {
 
     private lateinit var viewMvc: QuestionsListViewMvc
 
-    @field:Service private lateinit var fetchQuestionsUseCase: FetchQuestionsUseCase
-    @field:Service private lateinit var dialogsNavigator: DialogsNavigator
-    @field:Service private lateinit var screensNavigator: ScreensNavigator
-    @field:Service private lateinit var viewMvcFactory: ViewMvcFactory
+    @Inject
+    lateinit var fetchQuestionsUseCase: FetchQuestionsUseCase
+    @Inject
+    lateinit var dialogsNavigator: DialogsNavigator
+    @Inject
+    lateinit var screensNavigator: ScreensNavigator
+    @Inject
+    lateinit var viewMvcFactory: ViewMvcFactory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

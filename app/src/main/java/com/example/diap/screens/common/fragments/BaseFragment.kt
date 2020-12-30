@@ -2,7 +2,6 @@ package com.example.diap.screens.common.fragments
 
 import androidx.fragment.app.Fragment
 
-import com.example.diap.common.dependencyinjection.Injector
 import com.example.diap.common.dependencyinjection.PresentationModule
 import com.example.diap.common.dependencyinjection.presentation.DaggerPresentationComponent
 import com.example.diap.screens.common.activities.BaseActivity
@@ -20,6 +19,6 @@ open class BaseFragment : Fragment() {
             .build()
     }
 
-    protected val injector get() = Injector(presentationComponent)
+    protected val injector get() = presentationComponent
 
 }

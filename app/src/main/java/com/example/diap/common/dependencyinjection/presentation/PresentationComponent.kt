@@ -1,18 +1,14 @@
 package com.example.diap.common.dependencyinjection.presentation
 
 import com.example.diap.common.dependencyinjection.PresentationModule
-import com.example.diap.questions.FetchQuestionDetailsUseCase
-import com.example.diap.questions.FetchQuestionsUseCase
-import com.example.diap.screens.common.ScreensNavigator
-import com.example.diap.screens.common.dialogs.DialogsNavigator
-import com.example.diap.screens.common.viewsmvc.ViewMvcFactory
+import com.example.diap.screens.questiondetails.QuestionDetailsActivity
+import com.example.diap.screens.questionslist.QuestionsListActivity
+import com.example.diap.screens.questionslist.QuestionsListFragment
 import dagger.Component
 
 @Component(modules = [PresentationModule::class])
 interface PresentationComponent {
-    fun viewMvcFactory(): ViewMvcFactory
-    fun screensNavigator(): ScreensNavigator
-    fun dialogsNavigator(): DialogsNavigator
-    fun fetchQuestionsUseCase(): FetchQuestionsUseCase
-    fun fetchQuestionDetailsUseCase(): FetchQuestionDetailsUseCase
+    fun inject(fragment: QuestionsListFragment)
+    fun inject(activity: QuestionsListActivity)
+    fun inject(activity: QuestionDetailsActivity)
 }
