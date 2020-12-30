@@ -1,4 +1,4 @@
-package com.example.diap.common.dependencyinjection
+package com.example.diap.common.dependencyinjection.presentation
 
 import android.view.LayoutInflater
 import androidx.fragment.app.FragmentManager

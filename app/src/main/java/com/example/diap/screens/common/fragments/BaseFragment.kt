@@ -2,7 +2,7 @@ package com.example.diap.screens.common.fragments
 
 import androidx.fragment.app.Fragment
 
-import com.example.diap.common.dependencyinjection.PresentationModule
+import com.example.diap.common.dependencyinjection.presentation.PresentationModule
 import com.example.diap.common.dependencyinjection.presentation.DaggerPresentationComponent
 import com.example.diap.screens.common.activities.BaseActivity
 
