@@ -6,17 +6,19 @@ import com.example.diap.screens.common.imageloader.ImageLoader
 import com.example.diap.screens.questiondetails.QuestionDetailsViewMvc
 import com.example.diap.screens.questionslist.QuestionsListViewMvc
 import javax.inject.Inject
+import javax.inject.Provider
 
 class ViewMvcFactory @Inject constructor(
-    private val layoutInflater: LayoutInflater,
-    private val imageLoader: ImageLoader) {
+    private val layoutInflaterProvider: Provider<LayoutInflater>,
+    private val imageLoaderProvider: Provider<ImageLoader>
+) {
 
     fun newQuestionsListViewMvc(parent: ViewGroup?): QuestionsListViewMvc {
-        return QuestionsListViewMvc(layoutInflater, parent)
+        return QuestionsListViewMvc(layoutInflaterProvider.get(), parent)
     }
 
     fun newQuestionDetailsViewMvc(parent: ViewGroup?): QuestionDetailsViewMvc {
-        return QuestionDetailsViewMvc(layoutInflater, imageLoader, parent)
+        return QuestionDetailsViewMvc(layoutInflaterProvider.get(), imageLoaderProvider.get(), parent)
     }
 
 }
