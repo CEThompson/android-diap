@@ -93,4 +93,8 @@ class QuestionsListFragment : BaseFragment(), QuestionsListViewMvc.Listener {
     private fun onFetchFailed() {
         dialogsNavigator.showServerErrorDialog()
     }
+
+    override fun onViewModelClicked() {
+        screensNavigator.toViewModel()
+    }
 }
