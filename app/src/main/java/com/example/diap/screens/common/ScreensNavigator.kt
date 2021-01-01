@@ -1,14 +1,8 @@
 package com.example.diap.screens.common
 
-import androidx.appcompat.app.AppCompatActivity
-import com.example.diap.screens.questiondetails.QuestionDetailsActivity
+interface ScreensNavigator {
 
-class ScreensNavigator(private val activity: AppCompatActivity) {
-    fun toQuestionDetails(questionId: String) {
-        QuestionDetailsActivity.start(activity, questionId)
-    }
+    fun toQuestionDetails(questionId: String)
 
-    fun navigateBack() {
-        activity.onBackPressed()
-    }
+    fun navigateBack()
 }

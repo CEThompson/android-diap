@@ -23,10 +23,13 @@ class QuestionsListFragment : BaseFragment(), QuestionsListViewMvc.Listener {
 
     @Inject
     lateinit var fetchQuestionsUseCase: FetchQuestionsUseCase
+
     @Inject
     lateinit var dialogsNavigator: DialogsNavigator
+
     @Inject
     lateinit var screensNavigator: ScreensNavigator
+
     @Inject
     lateinit var viewMvcFactory: ViewMvcFactory
 
