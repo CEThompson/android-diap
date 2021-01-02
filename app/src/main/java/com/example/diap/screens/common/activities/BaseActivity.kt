@@ -3,6 +3,7 @@ package com.example.diap.screens.common.activities
 import androidx.appcompat.app.AppCompatActivity
 import com.example.diap.MyApplication
 import com.example.diap.common.dependencyinjection.activity.ActivityModule
+import com.example.diap.common.dependencyinjection.presentation.PresentationModule
 
 open class BaseActivity : AppCompatActivity() {
 
@@ -16,7 +17,7 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     private val presentationComponent by lazy {
-        activityComponent.newPresentationComponent()
+        activityComponent.newPresentationComponent(PresentationModule(this))
     }
 
     protected val injector get() = presentationComponent

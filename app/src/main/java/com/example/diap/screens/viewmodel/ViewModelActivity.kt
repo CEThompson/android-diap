@@ -1,4 +1,4 @@
-package com.techyourchance.dagger2course.screens.viewmodel
+package com.example.diap.screens.viewmodel
 
 import android.content.Context
 import android.content.Intent
@@ -11,8 +11,6 @@ import com.example.diap.screens.common.ScreensNavigator
 import com.example.diap.screens.common.activities.BaseActivity
 import com.example.diap.screens.common.toolbar.MyToolbar
 import com.example.diap.screens.common.viewmodels.ViewModelFactory
-import com.example.diap.screens.viewmodel.MyViewModel
-import com.example.diap.screens.viewmodel.MyViewModel2
 import javax.inject.Inject
 
 class ViewModelActivity : BaseActivity() {
@@ -42,8 +40,7 @@ class ViewModelActivity : BaseActivity() {
 
         myViewModel = ViewModelProvider(this, factory).get(MyViewModel::class.java)
         myViewModel2 = ViewModelProvider(this, factory).get(MyViewModel2::class.java)
-        myViewModel.questions.observe(this, Observer {
-            questions ->
+        myViewModel.questions.observe(this, Observer { questions ->
             Toast.makeText(this, "fetched ${questions.size} questions", Toast.LENGTH_LONG).show()
         })
     }

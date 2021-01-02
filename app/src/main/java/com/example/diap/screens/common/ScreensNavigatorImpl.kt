@@ -2,7 +2,8 @@ package com.example.diap.screens.common
 
 import androidx.appcompat.app.AppCompatActivity
 import com.example.diap.screens.questiondetails.QuestionDetailsActivity
-import com.techyourchance.dagger2course.screens.viewmodel.ViewModelActivity
+import com.example.diap.screens.viewmodel.ViewModelActivity
+
 import javax.inject.Inject
 
 class ScreensNavigatorImpl @Inject constructor(private val activity: AppCompatActivity) :

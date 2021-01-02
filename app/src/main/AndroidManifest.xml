@@ -22,7 +22,7 @@
 
         <activity android:name="com.example.diap.screens.questiondetails.QuestionDetailsActivity"/>
 
-        <activity android:name="com.techyourchance.dagger2course.screens.viewmodel.ViewModelActivity"/>
+        <activity android:name="com.example.diap.screens.viewmodel.ViewModelActivity"/>
 
     </application>
 
