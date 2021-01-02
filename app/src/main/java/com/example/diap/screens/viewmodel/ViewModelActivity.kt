@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.diap.R
 import com.example.diap.screens.common.ScreensNavigator
 import com.example.diap.screens.common.activities.BaseActivity
@@ -17,10 +18,13 @@ class ViewModelActivity : BaseActivity() {
     @Inject
     lateinit var screensNavigator: ScreensNavigator
 
+    @Inject
+    lateinit var factory: MyViewModel.Factory
+
     private lateinit var toolbar: MyToolbar
 
-    @Inject
-    lateinit var myViewModel: MyViewModel
+    private lateinit var myViewModel: MyViewModel
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         injector.inject(this)
@@ -33,6 +37,8 @@ class ViewModelActivity : BaseActivity() {
             screensNavigator.navigateBack()
         }
 
+        myViewModel = ViewModelProvider(this, factory).get(MyViewModel::class.java)
+        
         myViewModel.questions.observe(this, Observer {
             questions ->
             Toast.makeText(this, "fetched ${questions.size} questions", Toast.LENGTH_LONG).show()
