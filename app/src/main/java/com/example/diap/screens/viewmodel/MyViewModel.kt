@@ -1,6 +1,7 @@
 package com.example.diap.screens.viewmodel
 
 import androidx.lifecycle.*
+import com.example.diap.questions.FetchQuestionDetailsUseCase
 import com.example.diap.questions.FetchQuestionsUseCase
 import com.example.diap.questions.Question
 import kotlinx.coroutines.launch
@@ -9,7 +10,8 @@ import javax.inject.Inject
 import javax.inject.Provider
 
 class MyViewModel @Inject constructor (
-    private val fetchQuestionsUseCase: FetchQuestionsUseCase
+    private val fetchQuestionsUseCase: FetchQuestionsUseCase,
+    private val fetchQuestionDetailsUseCase: FetchQuestionDetailsUseCase
 ): ViewModel() {
 
     private val _questions = MutableLiveData<List<Question>>()
@@ -28,9 +30,9 @@ class MyViewModel @Inject constructor (
 
     }
 
-    class Factory @Inject constructor (private val fetchQuestionsUseCaseProvider: Provider<FetchQuestionsUseCase>): ViewModelProvider.Factory {
+    class Factory @Inject constructor (private val myViewModelProvider: Provider<MyViewModel>): ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return MyViewModel(fetchQuestionsUseCaseProvider.get()) as T
+            return myViewModelProvider.get() as T
         }
     }
 

@@ -38,7 +38,7 @@ class ViewModelActivity : BaseActivity() {
         }
 
         myViewModel = ViewModelProvider(this, factory).get(MyViewModel::class.java)
-        
+
         myViewModel.questions.observe(this, Observer {
             questions ->
             Toast.makeText(this, "fetched ${questions.size} questions", Toast.LENGTH_LONG).show()
