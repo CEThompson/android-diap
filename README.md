@@ -1,2 +1,2 @@
 # android-diap 
-Dependency Injection Architectural Pattern implementation
+An implementation of Dependency Injection Architectural Pattern as pure dependency injection and with Dagger2 and Hilt.
