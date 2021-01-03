@@ -11,8 +11,10 @@ import com.example.diap.screens.common.ScreensNavigator
 import com.example.diap.screens.common.activities.BaseActivity
 import com.example.diap.screens.common.toolbar.MyToolbar
 import com.example.diap.screens.common.viewmodels.ViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class ViewModelActivity : BaseActivity() {
 
     @Inject
@@ -28,7 +30,6 @@ class ViewModelActivity : BaseActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        injector.inject(this)
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.layout_view_model)
