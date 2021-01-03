@@ -1,26 +1,24 @@
 package com.example.diap.common.dependencyinjection.app
 
-import android.app.Application
-import com.example.diap.Constants
 import com.example.diap.common.dependencyinjection.Retrofit1
 import com.example.diap.common.dependencyinjection.Retrofit2
 import com.example.diap.networking.StackoverflowApi
 import com.example.diap.networking.UrlProvider
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Named
 
 // This class composes services and resides at the root of the dependency tree
 @Module
-class AppModule(val application: Application) {
+@InstallIn(ApplicationComponent::class)
+class AppModule() {
 
     @Provides
     @AppScope
     @Retrofit1
-    // @Named qualifier is builtin to javax inject package
-    //@Named("retrofit1")
     fun retrofit1(urlProvider: UrlProvider): Retrofit {
         return Retrofit.Builder()
             .baseUrl(urlProvider.getBaseUrl1())
@@ -41,9 +39,6 @@ class AppModule(val application: Application) {
     @AppScope
     @Provides
     fun urlProvider() = UrlProvider()
-
-    @Provides
-    fun application() = application
 
     @Provides
     @AppScope
