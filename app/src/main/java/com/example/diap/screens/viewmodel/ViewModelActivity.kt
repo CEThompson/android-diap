@@ -10,7 +10,6 @@ import com.example.diap.R
 import com.example.diap.screens.common.ScreensNavigator
 import com.example.diap.screens.common.activities.BaseActivity
 import com.example.diap.screens.common.toolbar.MyToolbar
-import com.example.diap.screens.common.viewmodels.ViewModelFactory
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -19,9 +18,6 @@ class ViewModelActivity : BaseActivity() {
 
     @Inject
     lateinit var screensNavigator: ScreensNavigator
-
-    @Inject
-    lateinit var factory: ViewModelFactory
 
     private lateinit var toolbar: MyToolbar
 
@@ -39,8 +35,8 @@ class ViewModelActivity : BaseActivity() {
             screensNavigator.navigateBack()
         }
 
-        myViewModel = ViewModelProvider(this, factory).get(MyViewModel::class.java)
-        myViewModel2 = ViewModelProvider(this, factory).get(MyViewModel2::class.java)
+        myViewModel = ViewModelProvider(this).get(MyViewModel::class.java)
+        myViewModel2 = ViewModelProvider(this).get(MyViewModel2::class.java)
         myViewModel.questions.observe(this, Observer { questions ->
             Toast.makeText(this, "fetched ${questions.size} questions", Toast.LENGTH_LONG).show()
         })

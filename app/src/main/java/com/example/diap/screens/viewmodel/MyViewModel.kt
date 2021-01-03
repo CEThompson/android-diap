@@ -1,31 +1,33 @@
 package com.example.diap.screens.viewmodel
 
-import androidx.lifecycle.*
+import androidx.hilt.Assisted
+import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.viewModelScope
 import com.example.diap.questions.FetchQuestionDetailsUseCase
 import com.example.diap.questions.FetchQuestionsUseCase
 import com.example.diap.questions.Question
 import com.example.diap.screens.common.viewmodels.SavedStateViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import java.lang.RuntimeException
-import javax.inject.Inject
-import javax.inject.Provider
 
-class MyViewModel @Inject constructor (
+class MyViewModel @ViewModelInject constructor(
     private val fetchQuestionsUseCase: FetchQuestionsUseCase,
-    private val fetchQuestionDetailsUseCase: FetchQuestionDetailsUseCase
-): SavedStateViewModel() {
+    private val fetchQuestionDetailsUseCase: FetchQuestionDetailsUseCase,
+    @Assisted savedStateHandle: SavedStateHandle
+) : SavedStateViewModel() {
 
-    private lateinit var _questions: MutableLiveData<List<Question>>
+    private val _questions: MutableLiveData<List<Question>> =
+        savedStateHandle.getLiveData("questions")
     val questions: LiveData<List<Question>> get() = _questions
 
-    override fun init(savedStateHandle: SavedStateHandle) {
-        _questions = savedStateHandle.getLiveData("questions")
-
+    init {
         viewModelScope.launch {
             delay(5000)
             val result = fetchQuestionsUseCase.fetchLatestQuestions()
-            if (result is FetchQuestionsUseCase.Result.Success){
+            if (result is FetchQuestionsUseCase.Result.Success) {
                 _questions.value = result.questions
             } else {
                 // Don't do this in actual code
